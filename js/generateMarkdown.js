@@ -8,7 +8,7 @@ function generateHtml(data) {
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Team Profile Generator</title>
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-      <link rel="stylesheet" href="css/team.css">
+      <link rel="stylesheet" href="./css/team.css">
   </head>
   <body>
       <header>
@@ -35,9 +35,16 @@ function generateCards(data) {
         <div class="card centers">
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">ID: ${data.employeeID}</li>
-                <li class="list-group-item">Email: <a href="mailto:${data.emailAddress}">${data.emailAddress}</a></li>
-                
-                <li class="list-group-item">office number: ${data.officeNumber}</li>
+                <li class="list-group-item">Email: <a href="mailto:${
+                  data.emailAddress
+                }">${data.emailAddress}</a></li>
+                ${
+                  data.role === "engineer"
+                    ? `<li class="list-group-item">GitHub: ${data.GitHub}</li>`
+                    : data.role === "intern"
+                    ? `<li class="list-group-item">school: ${data.school}</li>`
+                    : `<li class="list-group-item">office number: ${data.officeNumber}</li>`
+                }
             </ul>
         </div>
     </div>
