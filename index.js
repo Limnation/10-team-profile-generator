@@ -13,17 +13,17 @@ function promptManager() {
     .prompt([
       {
         type: "input",
-        name: "name",
-        message: "Enter their name.",
+        name: "nameM",
+        message: "Enter Manager name.",
       },
       {
         type: "input",
-        name: "employeeID",
+        name: "employeeIDM",
         message: "Enter the employee ID.",
       },
       {
         type: "input",
-        name: "emailAddress",
+        name: "emailAddressM",
         message: "Enter email address.",
       },
       {
@@ -44,7 +44,7 @@ function promptManager() {
       } else if (data.role === "intern") {
         promptIntern();
       } else {
-        makeFile();
+        makeFile(data);
       }
     });
 }
@@ -55,17 +55,17 @@ function promptEngineer() {
     .prompt([
       {
         type: "input",
-        name: "name",
-        message: "Pease Enter their name.",
+        name: "nameE",
+        message: "Enter Engineer name.",
       },
       {
         type: "input",
-        name: "employeeID",
+        name: "employeeIDE",
         message: "Enter the employee ID.",
       },
       {
         type: "input",
-        name: "emailAddress",
+        name: "emailAddressE",
         message: "Enter email address.",
       },
       {
@@ -86,7 +86,7 @@ function promptEngineer() {
       } else if (data.role === "intern") {
         promptIntern();
       } else {
-        makeFile();
+        makeFile(data);
       }
     });
 }
@@ -97,17 +97,17 @@ function promptIntern() {
     .prompt([
       {
         type: "input",
-        name: "name",
-        message: "Enter their name.",
+        name: "nameI",
+        message: "Enter Intern name.",
       },
       {
         type: "input",
-        name: "employeeID",
+        name: "employeeIDI",
         message: "Enter the employee ID.",
       },
       {
         type: "input",
-        name: "emailAddress",
+        name: "emailAddressI",
         message: "Enter email address.",
       },
       {
@@ -128,7 +128,7 @@ function promptIntern() {
       } else if (data.role === "intern") {
         promptIntern();
       } else {
-        makeFile();
+        makeFile(data);
       }
     });
 }
