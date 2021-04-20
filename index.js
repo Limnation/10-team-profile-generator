@@ -44,12 +44,7 @@ function promptManager() {
       } else if (data.role === "intern") {
         promptIntern();
       } else {
-        const filename = `teamroster.html`;
-
-        // creates file in markdown location with the generateMarkdown input data
-        fs.writeFile(`./profile/${filename}`, generateHtml(data), (err) =>
-          err ? console.log(err) : console.log("Success!")
-        );
+        makeFile();
       }
     });
 }
@@ -91,12 +86,7 @@ function promptEngineer() {
       } else if (data.role === "intern") {
         promptIntern();
       } else {
-        const filename = `teamroster.html`;
-
-        // creates file in markdown location with the generateMarkdown input data
-        fs.writeFile(`./profile/${filename}`, generateHtml(data), (err) =>
-          err ? console.log(err) : console.log("Success!")
-        );
+        makeFile();
       }
     });
 }
@@ -143,7 +133,7 @@ function promptIntern() {
     });
 }
 
-function makeFile() {
+function makeFile(data) {
   const filename = `teamroster.html`;
 
   // creates file in markdown location with the generateMarkdown input data

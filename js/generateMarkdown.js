@@ -16,7 +16,7 @@ function generateHtml(data) {
       </header>
       <section>
           <div class="row row-cols-1 row-cols-md-3 g-4 middle">
-           ${generateCards(data)}
+           ${(generateCards(data) += generateCards(data))}
           </div>
       </section>
   </body>
