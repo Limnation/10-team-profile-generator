@@ -5,50 +5,136 @@ const fs = require("fs");
 const inquirer = require("inquirer");
 
 // gets Specific functions {gernerateMarkdown} from the export information from generateMarkdown.js
-const { generateMarkdown } = require("./js/generateMarkdown.js");
+const { generateHtml, generateCards } = require("./js/generateMarkdown.js");
 
-function promptUser() {
+function promptManager() {
+  // Creates an array of questions for Manager input
+  inquirer.prompt([
+    {
+      type: "input",
+      name: "name",
+      message: "Enter their name.",
+    },
+    {
+      type: "input",
+      name: "employeeID",
+      message: "Enter the employee ID.",
+    },
+    {
+      type: "input",
+      name: "emailAddress",
+      message: "Enter email address.",
+    },
+    {
+      type: "input",
+      name: "officeNumber",
+      message: "Enter office number.",
+    },
+    {
+      type: "list",
+      name: "role",
+      message: "Do you want to add more members to the team?",
+      choices: ["engineer", "intern", "finished"],
+    },
+  ]);
+}
+
+function promptEngineer() {
   // Creates an array of questions for user input
-  inquirer
-    .prompt([
-      {
-        type: "input",
-        name: "yourProjectTitle",
-        message: "What is your Project Title?",
-      },
-      {
-        type: "confirm",
-        name: "tableOfContents",
-        message: "What do u want a Table of Contents?",
-      },
-      {
-        type: "list",
-        name: "licenses",
-        message: "Choose an open-source license",
-        choices: [
-          "MIT License",
-          "GNU General Public License v3.0",
-          "GNU Affero General Public License v3.0",
-        ],
-      },
-    ])
-    .then((data) => {
-      // split(' ') identifies space in the input and  join('') repmoves the spaces. So we do not have spaces in the file name.
-      console.log(data);
-      const filename = `${data.yourProjectTitle.split(" ").join("")}.md`;
-      console.log(filename);
+  inquirer.prompt([
+    {
+      type: "input",
+      name: "name",
+      message: "Pease Enter their name.",
+    },
+    {
+      type: "input",
+      name: "employeeID",
+      message: "Enter the employee ID.",
+    },
+    {
+      type: "input",
+      name: "emailAddress",
+      message: "Enter email address.",
+    },
+    {
+      type: "input",
+      name: "GitHub",
+      message: "Enter Engineer's GitHub.",
+    },
+    {
+      type: "list",
+      name: "role",
+      message: "Do you want to add more members to the team?",
+      choices: ["engineer", "intern", "finished"],
+    },
+  ]);
+}
 
-      // creates file in markdown location with the generateMarkdown input data
-      fs.writeFile(`./markdown/${filename}`, generateMarkdown(data), (err) =>
-        err ? console.log(err) : console.log("Success!")
-      );
-    });
+function promptIntern() {
+  // Creates an array of questions for user input
+  inquirer.prompt([
+    {
+      type: "input",
+      name: "name",
+      message: "Enter their name.",
+    },
+    {
+      type: "input",
+      name: "employeeID",
+      message: "Enter the employee ID.",
+    },
+    {
+      type: "input",
+      name: "emailAddress",
+      message: "Enter email address.",
+    },
+    {
+      type: "input",
+      name: "school",
+      message: "Enter school.",
+    },
+    {
+      type: "list",
+      name: "role",
+      message: "Do you want to add more members to the team?",
+      choices: ["engineer", "intern", "finished"],
+    },
+  ]);
+}
+
+if (data.role === "engineer") {
+  promptEngineer();
+} else if (data.role === "intern") {
+  promptIntern();
+} else {
+  const filename = `teamroster.html`;
+
+  // creates file in markdown location with the generateMarkdown input data
+  fs.writeFile(
+    `./profile/${filename}`,
+    generateHtml(data),
+    generateCards(data),
+    (err) => (err ? console.log(err) : console.log("Success!"))
+  );
 }
 
 // Creates a function to initialize app
 function init() {
-  promptUser();
+  promptManager();
 }
 
 // Function call to initialize app
 init();
+
+// .then((data) => {
+//   const filename = `teamroster.html`;
+
+//   // creates file in markdown location with the generateMarkdown input data
+//   fs.writeFile(
+//     `./profile/${filename}`,
+//     generateHtml(data),
+//     generateCards(data),
+//     (err) => (err ? console.log(err) : console.log("Success!"))
+//   );
+// });
