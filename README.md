@@ -1,5 +1,27 @@
 # 10 Object-Oriented Programming: Team Profile Generator
 
+[![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)
+
+## Myreadme with description
+
+The main objective in this project was to make a fully functional readme.md with node.js and using the [Inquirer package](https://www.npmjs.com/package/inquirer). Then record a walk through the of assignment.
+
+## screenshot
+
+![screenshot1](./assets/1.JPG)
+![screenshot2](./assets/2.JPG)
+![screenshot3](./assets/3.JPG)
+![screenshot4](./assets/4.JPG)
+![screenshot5](./assets/5.JPG)
+
+# link to deployed application
+
+[repository](https://github.com/Limnation/10-team-profile-generator)
+
+[published](https://github.com/Limnation/10-team-profile-generator/blob/main/profile/teamroster.html)
+
+[video](https://limnation.github.io/10-team-profile-generator/)
+
 ## Your Task
 
 Your task is to build a Node.js command-line application that takes in information about employees on a software engineering team, then generates an HTML webpage that displays summaries for each person. Testing is key to making code maintainable, so you’ll also write a unit test for every part of your code and ensure that it passes each test.

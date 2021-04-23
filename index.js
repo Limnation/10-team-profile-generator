@@ -3,157 +3,53 @@ const fs = require("fs");
 
 // Includes packages needed for this application
 const inquirer = require("inquirer");
+
+// array collecting all the responses in an array
 const responses = [];
 
-// gets Specific functions {gernerateMarkdown} from the export information from generateMarkdown.js
+// gets Specific functions {generateHtml, generateCards} from generatehtml.js
 const { generateHtml, generateCards } = require("./js/generatehtml.js");
 
-function promptManager() {
-  // Creates an array of questions for Manager input
-  inquirer
-    .prompt([
-      {
-        type: "list",
-        name: "manager",
-        message: "manager",
-        choices: ["manager"],
-      },
-      {
-        type: "input",
-        name: "name",
-        message: "Enter Manager name.",
-      },
-      {
-        type: "input",
-        name: "employeeID",
-        message: "Enter the employee ID.",
-      },
-      {
-        type: "input",
-        name: "emailAddress",
-        message: "Enter email address.",
-      },
-      {
-        type: "input",
-        name: "officeNumber",
-        message: "Enter office number.",
-      },
-      {
-        type: "list",
-        name: "role",
-        message: "Do you want to add more members to the team?",
-        choices: ["engineer", "intern", "finished"],
-      },
-    ])
-    .then((data) => {
-      if (data.role === "engineer") {
-        responses.push(data);
-        promptEngineer();
-      } else if (data.role === "intern") {
-        responses.push(data);
-        promptIntern();
-      } else {
-        responses.push(data);
-        makeFile(responses);
-      }
+// gets Specific arrays {manager, engineer, intern, role} from questions.js
+const { manager, engineer, intern, role } = require("./lib/questions.js");
+
+// arrow fucntion that prompts
+const prompts = () => {
+  inquirer.prompt(manager).then((data) => {
+    responses.push(data);
+    inquirer.prompt(role).then((data) => {
+      promptNext(data);
     });
+  });
+};
+
+// fucntion that prompts next inquirer
+function promptNext(data) {
+  if (data.role === "engineer") {
+    inquirer.prompt(engineer).then((data) => {
+      responses.push(data);
+      inquirer.prompt(role).then((data) => {
+        promptNext(data);
+      });
+    });
+  } else if (data.role === "intern") {
+    inquirer.prompt(intern).then((data) => {
+      responses.push(data);
+      inquirer.prompt(role).then((data) => {
+        promptNext(data);
+      });
+    });
+  } else {
+    makeFile(responses);
+  }
 }
 
-function promptEngineer() {
-  // Creates an array of questions for Engineer input
-  inquirer
-    .prompt([
-      {
-        type: "input",
-        name: "nameE",
-        message: "Enter Engineer name.",
-      },
-      {
-        type: "input",
-        name: "employeeID",
-        message: "Enter the employee ID.",
-      },
-      {
-        type: "input",
-        name: "emailAddress",
-        message: "Enter email address.",
-      },
-      {
-        type: "input",
-        name: "GitHub",
-        message: "Enter Engineer's GitHub.",
-      },
-      {
-        type: "list",
-        name: "role",
-        message: "Do you want to add more members to the team?",
-        choices: ["engineer", "intern", "finished"],
-      },
-    ])
-    .then((data) => {
-      if (data.role === "engineer") {
-        responses.push(data);
-        promptEngineer();
-      } else if (data.role === "intern") {
-        responses.push(data);
-        promptIntern();
-      } else {
-        responses.push(data);
-        makeFile(responses);
-      }
-    });
-}
-
-function promptIntern() {
-  // Creates an array of questions for Intern input
-  inquirer
-    .prompt([
-      {
-        type: "input",
-        name: "nameI",
-        message: "Enter Intern name.",
-      },
-      {
-        type: "input",
-        name: "employeeID",
-        message: "Enter the employee ID.",
-      },
-      {
-        type: "input",
-        name: "emailAddress",
-        message: "Enter email address.",
-      },
-      {
-        type: "input",
-        name: "school",
-        message: "Enter school.",
-      },
-      {
-        type: "list",
-        name: "role",
-        message: "Do you want to add more members to the team?",
-        choices: ["engineer", "intern", "finished"],
-      },
-    ])
-    .then((data) => {
-      if (data.role === "engineer") {
-        responses.push(data);
-        promptEngineer();
-      } else if (data.role === "intern") {
-        responses.push(data);
-        promptIntern();
-      } else {
-        responses.push(data);
-        makeFile(responses);
-      }
-    });
-}
-
+// Fucntion that Created my HTML page
 function makeFile(data) {
   console.log(data);
   const filename = `teamroster.html`;
 
-  // creates file in markdown location with the generateMarkdown input data
+  // creates file in markdown location with the HTML page input data
   fs.writeFile(`./profile/${filename}`, generateHtml(data), (err) =>
     err ? console.log(err) : console.log("Success!")
   );
@@ -161,7 +57,7 @@ function makeFile(data) {
 
 // Creates a function to initialize app
 function init() {
-  promptManager();
+  prompts();
 }
 
 // Function call to initialize app
