@@ -92,6 +92,23 @@ const role = [
   },
 ];
 
+// arrow fucntion that prompts manager
+const promptManager = () => {
+  inquirer.prompt(manager).then((data) => {
+    inquirer.prompt(role);
+    if (data.role === "engineer") {
+      responses.push(data);
+      promptEngineer();
+    } else if (data.role === "intern") {
+      responses.push(data);
+      promptIntern();
+    } else {
+      responses.push(data);
+      makeFile(responses);
+    }
+  });
+};
+
 // Fucntion that Created my HTML page
 function makeFile(data) {
   console.log(data);
