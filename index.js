@@ -3,6 +3,7 @@ const fs = require("fs");
 
 // Includes packages needed for this application
 const inquirer = require("inquirer");
+const responses = [];
 
 // gets Specific functions {gernerateMarkdown} from the export information from generateMarkdown.js
 const { generateHtml, generateCards } = require("./js/generateMarkdown.js");
@@ -12,18 +13,24 @@ function promptManager() {
   inquirer
     .prompt([
       {
+        type: "list",
+        name: "manager",
+        message: "manager",
+        choices: ["manager"],
+      },
+      {
         type: "input",
-        name: "nameM",
+        name: "name",
         message: "Enter Manager name.",
       },
       {
         type: "input",
-        name: "employeeIDM",
+        name: "employeeID",
         message: "Enter the employee ID.",
       },
       {
         type: "input",
-        name: "emailAddressM",
+        name: "emailAddress",
         message: "Enter email address.",
       },
       {
@@ -40,11 +47,14 @@ function promptManager() {
     ])
     .then((data) => {
       if (data.role === "engineer") {
+        responses.push(data);
         promptEngineer();
       } else if (data.role === "intern") {
+        responses.push(data);
         promptIntern();
       } else {
-        makeFile(data);
+        responses.push(data);
+        makeFile(responses);
       }
     });
 }
@@ -60,12 +70,12 @@ function promptEngineer() {
       },
       {
         type: "input",
-        name: "employeeIDE",
+        name: "employeeID",
         message: "Enter the employee ID.",
       },
       {
         type: "input",
-        name: "emailAddressE",
+        name: "emailAddress",
         message: "Enter email address.",
       },
       {
@@ -82,11 +92,14 @@ function promptEngineer() {
     ])
     .then((data) => {
       if (data.role === "engineer") {
+        responses.push(data);
         promptEngineer();
       } else if (data.role === "intern") {
+        responses.push(data);
         promptIntern();
       } else {
-        makeFile(data);
+        responses.push(data);
+        makeFile(responses);
       }
     });
 }
@@ -102,12 +115,12 @@ function promptIntern() {
       },
       {
         type: "input",
-        name: "employeeIDI",
+        name: "employeeID",
         message: "Enter the employee ID.",
       },
       {
         type: "input",
-        name: "emailAddressI",
+        name: "emailAddress",
         message: "Enter email address.",
       },
       {
@@ -124,16 +137,20 @@ function promptIntern() {
     ])
     .then((data) => {
       if (data.role === "engineer") {
+        responses.push(data);
         promptEngineer();
       } else if (data.role === "intern") {
+        responses.push(data);
         promptIntern();
       } else {
-        makeFile(data);
+        responses.push(data);
+        makeFile(responses);
       }
     });
 }
 
 function makeFile(data) {
+  console.log(data);
   const filename = `teamroster.html`;
 
   // creates file in markdown location with the generateMarkdown input data
