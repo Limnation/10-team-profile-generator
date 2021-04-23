@@ -7,8 +7,11 @@ const inquirer = require("inquirer");
 // array collecting all the responses in an array
 const responses = [];
 
-// gets Specific functions {gernerateMarkdown} from the export information from generateMarkdown.js
-const { generateHtml, generateCards } = require("./js/generateMarkdown.js");
+// gets Specific functions {generateHtml, generateCards} from generatehtml.js
+const { generateHtml, generateCards } = require("./js/generatehtml.js");
+
+// gets Specific arrays {manager, engineer, intern} from questions.js
+const { manager, engineer, intern } = require("./lib/questions.js");
 
 const role = [
   {

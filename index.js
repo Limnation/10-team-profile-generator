@@ -6,7 +6,7 @@ const inquirer = require("inquirer");
 const responses = [];
 
 // gets Specific functions {gernerateMarkdown} from the export information from generateMarkdown.js
-const { generateHtml, generateCards } = require("./js/generateMarkdown.js");
+const { generateHtml, generateCards } = require("./js/generatehtml.js");
 
 function promptManager() {
   // Creates an array of questions for Manager input
