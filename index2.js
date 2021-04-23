@@ -20,8 +20,8 @@ const prompts = () => {
     console.log(responses);
     inquirer.prompt(role).then((data) => {
       console.log(data);
+      promptNext(data);
     });
-    // promptNext(data);
   });
 };
 
@@ -29,12 +29,14 @@ const prompts = () => {
 function promptNext(data) {
   if (data.role === "engineer") {
     responses.push(data);
-    inquirer.prompt(engineer);
-    inquirer.prompt(role);
+    inquirer.prompt(engineer).then((data) => {
+      inquirer.prompt(role);
+    });
   } else if (data.role === "intern") {
     responses.push(data);
-    inquirer.prompt(intern);
-    inquirer.prompt(role);
+    inquirer.prompt(intern).then((data) => {
+      inquirer.prompt(role);
+    });
   } else {
     responses.push(data);
     makeFile(responses);
