@@ -16,21 +16,30 @@ const { manager, engineer, intern, role } = require("./lib/questions.js");
 // arrow fucntion that prompts
 const prompts = () => {
   inquirer.prompt(manager).then((data) => {
-    inquirer.prompt(role);
-    if (data.role === "engineer") {
-      responses.push(data);
-      inquirer.prompt(engineer);
-      inquirer.prompt(role);
-    } else if (data.role === "intern") {
-      responses.push(data);
-      inquirer.prompt(intern);
-      inquirer.prompt(role);
-    } else {
-      responses.push(data);
-      makeFile(responses);
-    }
+    responses.push(data);
+    console.log(responses);
+    inquirer.prompt(role).then((data) => {
+      console.log(data);
+    });
+    // promptNext(data);
   });
 };
+
+// fucntion that prompts next inquirer
+function promptNext(data) {
+  if (data.role === "engineer") {
+    responses.push(data);
+    inquirer.prompt(engineer);
+    inquirer.prompt(role);
+  } else if (data.role === "intern") {
+    responses.push(data);
+    inquirer.prompt(intern);
+    inquirer.prompt(role);
+  } else {
+    responses.push(data);
+    makeFile(responses);
+  }
+}
 
 // Fucntion that Created my HTML page
 function makeFile(data) {
