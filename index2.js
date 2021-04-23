@@ -17,9 +17,7 @@ const { manager, engineer, intern, role } = require("./lib/questions.js");
 const prompts = () => {
   inquirer.prompt(manager).then((data) => {
     responses.push(data);
-    console.log(responses);
     inquirer.prompt(role).then((data) => {
-      console.log(data);
       promptNext(data);
     });
   });
@@ -28,17 +26,20 @@ const prompts = () => {
 // fucntion that prompts next inquirer
 function promptNext(data) {
   if (data.role === "engineer") {
-    responses.push(data);
     inquirer.prompt(engineer).then((data) => {
-      inquirer.prompt(role);
+      responses.push(data);
+      inquirer.prompt(role).then((data) => {
+        promptNext(data);
+      });
     });
   } else if (data.role === "intern") {
-    responses.push(data);
     inquirer.prompt(intern).then((data) => {
-      inquirer.prompt(role);
+      responses.push(data);
+      inquirer.prompt(role).then((data) => {
+        promptNext(data);
+      });
     });
   } else {
-    responses.push(data);
     makeFile(responses);
   }
 }
