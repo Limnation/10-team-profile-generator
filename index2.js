@@ -3,85 +3,12 @@ const fs = require("fs");
 
 // Includes packages needed for this application
 const inquirer = require("inquirer");
+
+// array collecting all the responses in an array
 const responses = [];
 
 // gets Specific functions {gernerateMarkdown} from the export information from generateMarkdown.js
 const { generateHtml, generateCards } = require("./js/generateMarkdown.js");
-
-const manager = [
-  {
-    type: "list",
-    name: "manager",
-    message: "manager",
-    choices: ["manager"],
-  },
-  {
-    type: "input",
-    name: "name",
-    message: "Enter Manager name.",
-  },
-  {
-    type: "input",
-    name: "employeeID",
-    message: "Enter the employee ID.",
-  },
-  {
-    type: "input",
-    name: "emailAddress",
-    message: "Enter email address.",
-  },
-  {
-    type: "input",
-    name: "officeNumber",
-    message: "Enter office number.",
-  },
-];
-
-const engineer = [
-  {
-    type: "input",
-    name: "nameE",
-    message: "Enter Engineer name.",
-  },
-  {
-    type: "input",
-    name: "employeeID",
-    message: "Enter the employee ID.",
-  },
-  {
-    type: "input",
-    name: "emailAddress",
-    message: "Enter email address.",
-  },
-  {
-    type: "input",
-    name: "GitHub",
-    message: "Enter Engineer's GitHub.",
-  },
-];
-
-const intern = [
-  {
-    type: "input",
-    name: "nameI",
-    message: "Enter Intern name.",
-  },
-  {
-    type: "input",
-    name: "employeeID",
-    message: "Enter the employee ID.",
-  },
-  {
-    type: "input",
-    name: "emailAddress",
-    message: "Enter email address.",
-  },
-  {
-    type: "input",
-    name: "school",
-    message: "Enter school.",
-  },
-];
 
 const role = [
   {
@@ -95,13 +22,15 @@ const role = [
 // arrow fucntion that prompts
 const prompts = () => {
   inquirer.prompt(manager).then((data) => {
-    inquirer.prompt(role);
+    // inquirer.prompt(role);
     if (data.role === "engineer") {
       responses.push(data);
       inquirer.prompt(engineer);
+      inquirer.prompt(role);
     } else if (data.role === "intern") {
       responses.push(data);
       inquirer.prompt(intern);
+      inquirer.prompt(role);
     } else {
       responses.push(data);
       makeFile(responses);
