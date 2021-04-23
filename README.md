@@ -11,8 +11,6 @@ The main objective in this project was to make a application that takes in infor
 ![screenshot1](./assets/1.JPG)
 ![screenshot2](./assets/2.JPG)
 ![screenshot3](./assets/3.JPG)
-![screenshot4](./assets/4.JPG)
-![screenshot5](./assets/5.JPG)
 
 # link to deployed application
 
