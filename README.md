@@ -4,7 +4,7 @@
 
 ## Myreadme with description
 
-The main objective in this project was to make a fully functional readme.md with node.js and using the [Inquirer package](https://www.npmjs.com/package/inquirer). Then record a walk through the of assignment.
+The main objective in this project was to make a application that takes in information about employees on a software engineering team, then generates an HTML webpage that displays summaries for each person. with node.js and using the [Inquirer package](https://www.npmjs.com/package/inquirer). Then record a walk through the of assignment.
 
 ## screenshot
 
