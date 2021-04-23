@@ -92,16 +92,16 @@ const role = [
   },
 ];
 
-// arrow fucntion that prompts manager
-const promptManager = () => {
+// arrow fucntion that prompts
+const prompts = () => {
   inquirer.prompt(manager).then((data) => {
     inquirer.prompt(role);
     if (data.role === "engineer") {
       responses.push(data);
-      promptEngineer();
+      inquirer.prompt(engineer);
     } else if (data.role === "intern") {
       responses.push(data);
-      promptIntern();
+      inquirer.prompt(intern);
     } else {
       responses.push(data);
       makeFile(responses);
@@ -122,7 +122,7 @@ function makeFile(data) {
 
 // Creates a function to initialize app
 function init() {
-  promptManager();
+  prompts();
 }
 
 // Function call to initialize app
