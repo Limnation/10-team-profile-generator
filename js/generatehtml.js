@@ -28,57 +28,62 @@ function generateCards(data) {
   let htmlArray = [];
 
   data.forEach((employee) => {
-    htmlArray.push(`<div>this is a card</div>`);
+    htmlArray.push(`
+    <div class="col">
+      <div class="card">
+          <div class="card-body b-color">
+          <h5 class="card-title">${
+            employee.role === "engineer"
+              ? `${employee.name}`
+              : employee.role === "intern"
+              ? `${employee.name}`
+              : `${employee.name}`
+          }</h5>
+          <h5 class="card-title"><img src="" class="" alt="">${
+            employee.role === "engineer"
+              ? `${employee.role}`
+              : employee.role === "intern"
+              ? `${employee.role}`
+              : `${employee.role}`
+          }</h5>
+          </div>
+          <div class="card centers">
+              <ul class="list-group list-group-flush">
+                  <li class="list-group-item">ID: ${
+                    employee.role === "engineer"
+                      ? `${employee.employeeID}`
+                      : employee.role === "intern"
+                      ? `${employee.employeeID}`
+                      : `${employee.employeeID}`
+                  }</li>
+                  <li class="list-group-item">Email: <a href="mailto:${
+                    employee.role === "engineer"
+                      ? `${employee.emailAddress}`
+                      : employee.role === "intern"
+                      ? `${employee.emailAddress}`
+                      : `${employee.emailAddress}`
+                  }">${
+      employee.role === "engineer"
+        ? `${employee.emailAddress}`
+        : employee.role === "intern"
+        ? `${employee.emailAddress}`
+        : `${employee.emailAddress}`
+    }</a></li>
+                  ${
+                    employee.role === "engineer"
+                      ? `<li class="list-group-item">GitHub: ${employee.GitHub}</li>`
+                      : employee.role === "intern"
+                      ? `<li class="list-group-item">school: ${employee.school}</li>`
+                      : `<li class="list-group-item">office number: ${employee.officeNumber}</li>`
+                  }
+              </ul>
+          </div>
+      </div>
+    </div>
+  `);
   });
 
   return htmlArray.join("");
-  // return `
-  //   <div class="col">
-  //     <div class="card">
-  //         <div class="card-body b-color">
-  //         <h5 class="card-title">NAME</h5>
-  //         <h5 class="card-title"><img src="" class="" alt="">${
-  //           employee.role === "engineer"
-  //             ? `${employee.name}`
-  //             : employee.role === "intern"
-  //             ? `${employee.name}`
-  //             : `${employee.name}`
-  //         }</h5>
-  //         </div>
-  //         <div class="card centers">
-  //             <ul class="list-group list-group-flush">
-  //                 <li class="list-group-item">ID: ${
-  //                   employee.role === "engineer"
-  //                     ? `${employee.employeeID}`
-  //                     : employee.roleI === "intern"
-  //                     ? `${employee.employeeID}`
-  //                     : `${employee.employeeID}`
-  //                 }</li>
-  //                 <li class="list-group-item">Email: <a href="mailto:${
-  //                   employee.roleE === "engineer"
-  //                     ? `${employee.emailAddress}`
-  //                     : employee.role === "intern"
-  //                     ? `${employee.emailAddress}`
-  //                     : `${employee.emailAddress}`
-  //                 }">${
-  //   employee.roleE === "engineer"
-  //     ? `${employee.emailAddress}`
-  //     : employee.role === "intern"
-  //     ? `${employee.emailAddress}`
-  //     : `${employee.emailAddress}`
-  // }</a></li>
-  //                 ${
-  //                   employee.role === "engineer"
-  //                     ? `<li class="list-group-item">GitHub: ${employee.GitHub}</li>`
-  //                     : employee.roleI === "intern"
-  //                     ? `<li class="list-group-item">school: ${employee.school}</li>`
-  //                     : `<li class="list-group-item">office number: ${employee.officeNumber}</li>`
-  //                 }
-  //             </ul>
-  //         </div>
-  //     </div>
-  //   </div>
-  // `;
 }
 
 // module.exports is an object we use to store variables or methods to be called on in other js

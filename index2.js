@@ -10,22 +10,13 @@ const responses = [];
 // gets Specific functions {generateHtml, generateCards} from generatehtml.js
 const { generateHtml, generateCards } = require("./js/generatehtml.js");
 
-// gets Specific arrays {manager, engineer, intern} from questions.js
-const { manager, engineer, intern } = require("./lib/questions.js");
-
-const role = [
-  {
-    type: "list",
-    name: "role",
-    message: "Do you want to add more members to the team?",
-    choices: ["engineer", "intern", "finished"],
-  },
-];
+// gets Specific arrays {manager, engineer, intern, role} from questions.js
+const { manager, engineer, intern, role } = require("./lib/questions.js");
 
 // arrow fucntion that prompts
 const prompts = () => {
   inquirer.prompt(manager).then((data) => {
-    // inquirer.prompt(role);
+    inquirer.prompt(role);
     if (data.role === "engineer") {
       responses.push(data);
       inquirer.prompt(engineer);
