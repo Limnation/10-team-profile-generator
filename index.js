@@ -62,3 +62,8 @@ function init() {
 
 // Function call to initialize app
 init();
+
+//export
+module.exports = {
+  init,
+};
